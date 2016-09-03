@@ -2,12 +2,16 @@
 
 namespace app\components;
 use yii\base\Widget;
-
+use app\models\Category;
+use Yii;
 
 class MenuWidget extends Widget
 {
     
     public $tpl;
+    public $data;
+    public $tree;
+    public $menuHtml;
     
     public function init()
     {
@@ -20,7 +24,46 @@ class MenuWidget extends Widget
     }
     
     public function run()
-    {
-        return $this->tpl;
+    {   // cache
+        $menu = Yii::$app->cache->get('menu');
+        if ($menu) return $menu;
+        
+        $this->data = Category::find()->indexBy('id')->asArray()->all();
+        $this->tree = $this->getTree();
+        $this->menuHtml = $this->getMenuHtml($this->tree);
+        //cache
+        Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        return $this->menuHtml;
     }
+    protected function getTree()
+    {
+        $tree = [];
+        foreach ($this->data as $id => &$none)
+        {
+            if(!$none['parent_id'])
+            {
+                $tree[$id] = &$none;
+            }   
+            else {
+                $this->data[$none['parent_id']]['childs'][$none['id']] = &$none;
+            }
+        }
+        return $tree;
+    }
+    protected function getMenuHtml($tree)
+    {
+        $str .= '';
+        foreach ($tree as $category)
+        {
+            $str .= $this->catToTemplate($category);
+        }
+        return $str;
+    }
+    protected function catToTemplate($category)
+    {
+        ob_start();
+        include __DIR__ . '/menu_tpl/' . $this->tpl;
+        return ob_get_clean();
+    }
+    
 }
