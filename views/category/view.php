@@ -88,16 +88,13 @@ use yii\helpers\Html;
                     <?php endif; ?>
                     <?php endforeach; ?>
                         
-                    <?php else : ?>
-                    <h2>Товаров нет</h2>
-                    <?php endif; ?>
                     <div class="clearfix"></div>
-                    <ul class="pagination">
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">&raquo;</a></li>
-                    </ul>
+                    
+                     <?php echo \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>   
+                        
+                    <?php else : ?>
+                        <h2>Товаров нет</h2>
+                    <?php endif; ?>
                 </div><!--features_items-->
             </div>
         </div>
