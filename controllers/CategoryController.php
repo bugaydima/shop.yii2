@@ -16,7 +16,6 @@ class CategoryController extends AppController
     }
     public function actionView($id) 
     {
-        $id = Yii::$app->request->get('id');
         $category = Category::findOne($id);
         if (empty($category))
             throw new \yii\web\HttpException(404, 'Такой категории не существует.');
@@ -34,5 +33,21 @@ class CategoryController extends AppController
         $this->setMetaTag('E-Shopper | ' . $category['name'], $category['keywords'], $category['description']);
         
         return $this->render('view', compact('products', 'pages', 'category'));
+    }
+    public function actionSearch()
+    {
+        $quest = trim(Yii::$app->request->get('q'));
+        if (!$quest)
+            return $this->render('search', [$this->view->title = 'E-Shopper | Поиск']);
+        
+        $query = Product::find()->where(['like', 'name', $quest]);
+        $pages = new Pagination(['totalCount' => $query->count(),
+                                 'pageSize' => 6, 
+                                 'forcePageParam' => false,
+                                 'pageSizeParam' => false]);
+        $products = $query->offset($pages->offset)->limit($pages->limit)->all();
+        
+        $this->view->title = 'E-Shopper | Поиск';
+        return $this->render('search', compact('products', 'pages', 'quest'));
     }
 }
