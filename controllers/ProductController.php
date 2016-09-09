@@ -11,6 +11,8 @@ class ProductController extends AppController
         $id = Yii::$app->request->get('id');
         
         $product = Product::findOne($id);
+        if (empty($product))
+            throw new \yii\web\HttpException(404, 'Такого товара не существует.');
 //        $product = Product::find()->with('category')->where(['id' => $id])->limit(1)->one();
         $hits = Product::find()->where(['hit' => '1'])->limit(6)->asarray()->all();
         
