@@ -7,6 +7,7 @@ use yii\data\Pagination;
 
 class CategoryController extends AppController
 {
+    
     public function actionIndex()
     {
         $hits = Product::find()->where(['hit' => '1'])->limit(6)->asarray()->all();
@@ -14,6 +15,7 @@ class CategoryController extends AppController
         
         return $this->render('index', compact('hits'));
     }
+    
     public function actionView($id) 
     {
         $category = Category::findOne($id);
@@ -34,6 +36,7 @@ class CategoryController extends AppController
         
         return $this->render('view', compact('products', 'pages', 'category'));
     }
+    
     public function actionSearch()
     {
         $quest = trim(Yii::$app->request->get('q'));

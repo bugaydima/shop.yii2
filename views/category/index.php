@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 <section id="slider"><!--slider-->
     <div class="container">
@@ -72,7 +73,7 @@ use yii\helpers\Html;
                     <h2>Category</h2>
                     <!--category-productsr-->
                     <ul class="catalog category-products">
-<?= app\components\MenuWidget::widget(['tpl' => 'menu']); ?>
+            <?= app\components\MenuWidget::widget(['tpl' => 'menu']); ?>
                     </ul>
                     <!--/category-products-->
 
@@ -117,11 +118,11 @@ use yii\helpers\Html;
                                         <div class="productinfo text-center">
         <?= Html::img("@web/images/products/{$hit['img']}", ['alt' => $hit['name']]); ?>
                                             <h2>$ <?= $hit['price']; ?> </h2>
-                                            <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $hit['id']]); ?>">
+                                            <p><a href="<?= Url::to(['product/view', 'id' => $hit['id']]); ?>">
                                                 <?= $hit['name']; ?>
                                                </a>
                                             </p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="<?= Url::to(['cart/add', 'id' => $hit['id']]); ?>" data-id ="<?= $hit['id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                         <!--<div class="product-overlay">
                                                 <div class="overlay-content">
