@@ -25,4 +25,16 @@ class Cart extends ActiveRecord
         
         $_SESSION['cart.summ'] = isset($_SESSION['cart.summ']) ? $_SESSION['cart.summ'] + $quanty * $product->price : $quanty * $product->price;
     }
+    
+    public function recalc($id)
+    {
+        if (!isset($_SESSION['cart'][$id])) return false;
+        $quantyMinus = $_SESSION['cart'][$id]['quanty'];
+        $summMinus = $_SESSION['cart'][$id]['quanty'] * $_SESSION['cart'][$id]['price'];
+        
+        $_SESSION['cart.quanty'] -= $quantyMinus;
+        $_SESSION['cart.summ'] -= $summMinus;
+        
+        unset($_SESSION['cart'][$id]);
+    }
 }
