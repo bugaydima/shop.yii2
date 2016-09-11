@@ -10,6 +10,9 @@ class CartController extends AppController
     public function actionAdd()
     {
         $id = Yii::$app->request->get('id');
+        $quanty = (int)Yii::$app->request->get('quanty');
+        $quanty = !$quanty ? 1 : $quanty;
+        
         $product = Product::findOne($id);
         
         if (empty($product)) return false;
@@ -18,8 +21,11 @@ class CartController extends AppController
         $session->open();
         
         $cart = new Cart();
-        $cart->addToCart($product);
+        $cart->addToCart($product, $quanty);
         
+        if (!Yii::$app->request->isAjax){
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
     }
@@ -57,5 +63,10 @@ class CartController extends AppController
         
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
+    }
+    
+    public function actionView()
+    {
+        return $this->render('view');
     }
 }

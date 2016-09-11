@@ -62,7 +62,7 @@ use yii\helpers\Html;
                                         <?= $product['name']; ?>
                                        </a>
                                     </p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="<?= yii\helpers\Url::to(['cart/add', 'id' => $product->id]); ?>" data-id ="<?= $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
 <!--                                <div class="product-overlay">
                                     <div class="overlay-content">
