@@ -1,29 +1,17 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Created by PhpStorm.
+ * User: Andrey
+ * Date: 15.05.2016
+ * Time: 15:53
  */
 
 namespace app\modules\admin\controllers;
-use yii\base\Controller;
-use yii\filters\AccessControl;
+use yii\web\Controller;
+
 
 class AppAdminController extends Controller{
-   
-    public function behaviors()
-    {
-        return [
-            'accsess' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                    'allow' => true,
-                    'roles' => ['@']
-                    ]    
-                ]
-            ]
-            ];
-    }
-}
+
+
+
+} 

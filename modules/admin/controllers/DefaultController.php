@@ -7,7 +7,8 @@ use yii\web\Controller;
 /**
  * Default controller for the `admin` module
  */
-class DefaultController extends AppAdminController{
+class DefaultController extends AppAdminController
+{
     /**
      * Renders the index view for the module
      * @return string
