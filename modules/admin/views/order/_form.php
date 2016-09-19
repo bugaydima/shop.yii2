@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
-use yii\bootstrap\Widget;
+
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Order */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,16 +14,13 @@ use yii\bootstrap\Widget;
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->widget(DatePicker::className(),[
-        'name'  => 'updated_at',
-        'dateFormat' => 'yyyy-MM-dd',
-    ])->textInput()  ?>
+    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <?= $form->field($model, 'qty')->textInput() ?>
 
     <?= $form->field($model, 'sum')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ '0' => 'Активен', '1' => 'Завершен' ]) ?>
+    <?= $form->field($model, 'status')->dropDownList([ '0' => 'Активен', '1' => 'Завершен', ]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
