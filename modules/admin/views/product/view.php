@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->category->name ? $model->category->name : 'Самостоятельная категория',
             ],
             'name',
-            'content:ntext',
+            'content:html',
             'price',
             'keywords',
             'description',
