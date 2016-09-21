@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\modules\admin\models;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -87,6 +88,13 @@ class ProductController extends AppAdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = \yii\web\UploadedFile::getInstance($model, 'image');
+            if ($model->image)
+            {
+                $model->upload();
+            }
+            
+            Yii::$app->session->setFlash('success', "Товар {$model->name} обновлен");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -121,6 +129,17 @@ class ProductController extends AppAdminController
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    public function upload()
+    {
+        if ($this->validate())
+        {
+            $path = 'upload/store' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            return true;
+        }else {
+            return false;
         }
     }
 }

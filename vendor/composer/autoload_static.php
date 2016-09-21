@@ -24,6 +24,10 @@ class ComposerStaticInit934b6c5f0d9576f6d744810784c17751
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'r' => 
+        array (
+            'rico\\yii2images\\' => 16,
+        ),
         'm' => 
         array (
             'mihaildev\\elfinder\\' => 19,
@@ -76,6 +80,10 @@ class ComposerStaticInit934b6c5f0d9576f6d744810784c17751
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'rico\\yii2images\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/costa-rico/yii2-images',
+        ),
         'mihaildev\\elfinder\\' => 
         array (
             0 => __DIR__ . '/..' . '/mihaildev/yii2-elfinder',
@@ -95,6 +103,13 @@ class ComposerStaticInit934b6c5f0d9576f6d744810784c17751
     );
 
     public static $prefixesPsr0 = array (
+        'a' => 
+        array (
+            'abeautifulsite' => 
+            array (
+                0 => __DIR__ . '/..' . '/abeautifulsite/simpleimage/src',
+            ),
+        ),
         'H' => 
         array (
             'HTMLPurifier' => 

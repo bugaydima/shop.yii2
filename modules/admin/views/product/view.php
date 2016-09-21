@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'keywords',
             'description',
-            'img',
+            'image',
 //            [
 //                'attribute' => 'hit',
 //                'value' => function ($data){
