@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+<?php $img = $model->getImage(); ?>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -40,14 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'keywords',
             'description',
-            'image',
-//            [
-//                'attribute' => 'hit',
-//                'value' => function ($data){
-//                return !$data->hit ? '<span class="text-danger">Нет</span>' : '<span class="text-success">Да</span>';
-//                },
-//                'format' => 'html',
-//            ],
+            [
+                'attribute' => 'image',
+                'value' => "<img src='{$img->getUrl()}'>",
+                'format' => 'html',
+            ],
             'hit',
             'new',
             'sale',

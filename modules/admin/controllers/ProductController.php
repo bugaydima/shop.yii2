@@ -93,6 +93,9 @@ class ProductController extends AppAdminController
             {
                 $model->upload();
             }
+            unset($model->image);
+            $model->gallery = \yii\web\UploadedFile::getInstances($model, 'gallery');
+            $model->uploadGallery();
             
             Yii::$app->session->setFlash('success', "Товар {$model->name} обновлен");
             return $this->redirect(['view', 'id' => $model->id]);
@@ -131,15 +134,5 @@ class ProductController extends AppAdminController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    public function upload()
-    {
-        if ($this->validate())
-        {
-            $path = 'upload/store' . $this->image->baseName . '.' . $this->image->extension;
-            $this->image->saveAs($path);
-            return true;
-        }else {
-            return false;
-        }
-    }
+    
 }
